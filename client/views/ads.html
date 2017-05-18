@@ -1,0 +1,6 @@
+<div class="" ng-repeat="ad in $ctrl.ads track by $index">
+  <h1>{{ad.title}}</h1>
+  <span>by: {{ad.price}} | {{ad.created_at}}</span>
+  <p>{{ad.description}}<p>
+  <img ng-src="{{ad.image_img}}" alt="image here">
+</div>
