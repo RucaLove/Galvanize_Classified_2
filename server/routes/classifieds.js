@@ -9,6 +9,8 @@ router.get('/', function(req, res) {
   .select('id', 'title', 'description', 'price', 'item_image')
     .then((classifieds) => {
       res.json(classifieds);
+    }).catch(function(err) {
+      res.send(err);
     })
 });
 
@@ -17,6 +19,8 @@ router.get('/:id', function(req, res) {
   .select('id', 'title', 'description', 'price', 'item_image')
     .then((classifieds) => {
       res.json(classifieds[0]);
+    }).catch(function(err) {
+      res.send(err);
     })
 });
 
@@ -31,6 +35,8 @@ router.post('/', (req, res, next) => {
     .returning(["id", "title", "description", "price", "item_image"])
     .then((classified) => {
       res.json(classified[0]);
+    }).catch(function(err) {
+      res.send(err);
     })
 });
 
@@ -45,7 +51,9 @@ router.patch('/:id', function(req, res, next) {
   .returning(["id", "title", "description", "price", "item_image"])
   .then(classifieds => {
     res.json(classifieds[0])
-  })
+  }).catch(function(err) {
+      res.send(err);
+    })
 })
 
 router.delete('/:id', function(req, res, next) {
@@ -55,7 +63,9 @@ router.delete('/:id', function(req, res, next) {
   .returning(["id", "title", "description", "price", "item_image"])
   .then(classifieds => {
     res.send(classifieds[0])
-  })
+  }).catch(function(err) {
+      res.send(err);
+    })
 })
 
 module.exports = router;

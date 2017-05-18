@@ -4,12 +4,25 @@ const express = require('express');
 const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const path = require('path')
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../client')))
+app.use(express.static(path.join(__dirname, '/../', 'node_modules')))
 
-const messages = require('./routes/classifieds');
-app.use('/classifieds', messages);
+const classifieds = require('./routes/classifieds');
+app.use('/classifieds', classifieds);
+
+app.use('/javascripts', express.static(__dirname + "/../client/javascripts"));
+app.use('/stylesheets', express.static(__dirname + "/../client/stylesheets"));
+app.use('/views', express.static(__dirname + "/../client/views"));
+
+app.use('/api/classifieds', classifieds);
+
+app.get('*', function(req, res) {
+  res.sendFile('index.html', { root: './client/views' });
+});
 
 const port = process.env.PORT || 3000;
 
