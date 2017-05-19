@@ -8,16 +8,25 @@
 
     <!-- CSS tag -->
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
   </head>
   <body>
-  <ads></ads>
+    <div class="container">
+      <div class="row center">
+        <ads></ads>
+        <ad-list></ad-list>
+        <ui-view></ui-view>
+      </div>
+    </div>
 
   <!-- Angular script code -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.js"></script>
   <script src="/javascripts/app.js"></script>
   <script src="/javascripts/ad.service.js"></script>
-  <script src="/javascripts/controllers.js"></script>
-  <script src="/javascripts/services.js"></script>
+  <script src="/javascripts/new.service.js"></script>
+  <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <!-- <script src="/javascripts/controllers.js"></script>
+  <script src="/javascripts/services.js"></script> -->
   </body>
 </html>

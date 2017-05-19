@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.string("title").notNullable()
     table.string("description").notNullable()
     table.decimal("price").notNullable()
-    table.string("item_image").notNullable()
+    table.string("item_image").notNullable().defaultTo("https://images-na.ssl-images-amazon.com/images/I/41VwGotRZsL._SY300_.jpg")
     table.timestamps(true, true)
   })
 };
