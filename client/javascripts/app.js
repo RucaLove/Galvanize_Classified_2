@@ -1,16 +1,15 @@
 (function() {
+
   angular.module("classifieds", [])
   .component('ads', {
     controller: controller,
-    templateUrl: '../views/ads.html'
-  })
-  .component('adList', {
-    templateUrl: '../views/ad-list.html',
-    controller: adlistController
+    templateUrl: './views/ads.html'
   })
 
   function controller(AdService){
   const vm = this;
+  vm.createAd = createAd
+  vm.deleteAd = deleteAd
 
   vm.$onInit = function(){
     AdService.getAd().then(function(data){
@@ -18,22 +17,23 @@
       vm.ads = data
     })
   }
-}
 
-  function adlistController(NewService) {
-    const vm = this
+  // vm.toggleAdForm = toggleAdForm
+  // function toggleAdForm() {
+  //   vm.newAd = !vm.newAd
+  // }
 
-    vm.toggleAdForm = toggleAdForm
-    vm.createAd = createAd
+  function createAd() {
+    AdService.newAd(vm.ad)
+    delete vm.ad
+  }
 
-    function toggleAdForm() {
-      vm.newAd = !vm.newAd
-    }
-
-    function createAd() {
-      NewService.newAd(vm.ad)
+    function deleteAd() {
+      console.log(vm.ad);
+      AdService.deleteAd(vm.ad)
       delete vm.ad
     }
+
   }
 
 })()

@@ -5,23 +5,24 @@ const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path')
+const router = express.Router()
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../client')))
+app.use(express.static(path.join(__dirname, 'client')))
 app.use(express.static(path.join(__dirname, '/../', 'node_modules')))
 
-const classifieds = require('./routes/classifieds');
-app.use('/classifieds', classifieds);
+const classifieds = require('./server/routes/classifieds');
+// app.use('/classifieds', classifieds);
 
-app.use('/javascripts', express.static(__dirname + "/../client/javascripts"));
-app.use('/stylesheets', express.static(__dirname + "/../client/stylesheets"));
-app.use('/views', express.static(__dirname + "/../client/views"));
+app.use('/javascripts', express.static(__dirname + "./client/javascripts"));
+// app.use('/stylesheets', express.static(__dirname + "./client/stylesheets"));
+app.use('/views', express.static(__dirname + "./client/views"));
 
 app.use('/api/classifieds', classifieds);
 
 app.get('*', function(req, res) {
-  res.sendFile('index.html', { root: './client/views' });
+  res.sendFile('index.html', { root: 'client' });
 });
 
 const port = process.env.PORT || 3000;

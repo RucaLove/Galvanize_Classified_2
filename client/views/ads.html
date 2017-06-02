@@ -1,3 +1,33 @@
+<div class="container">
+    <div class="col-md-8">
+
+        <form name="form" novalidate ng-submit="$ctrl.createAd()">
+            <div ng-class="{'form-group': true, 'has-error': form.title.$invalid && form.title.$touched }">
+                <label for="title">Title</label>
+                <input class="form-control" name="title" required ng-model="$ctrl.ad.title">
+            </div>
+            <div ng-class="{'form-group': true, 'has-error': form.price.$invalid && form.price.$touched }">
+                <label>Price</label>
+                <input class="form-control" name="price" required ng-model="$ctrl.ad.price">
+            </div>
+            <div ng-class="{'form-group': true, 'has-error': form.description.$invalid && form.description.$touched }">
+                <label>Description</label>
+                <textarea class="form-control" name="description" required ng-model="$ctrl.ad.description"></textarea>
+            </div>
+            <!-- <div ng-class="{'form-group': true, 'has-error': form.item_image.$invalid && form.item_image.$touched }">
+                <label>Item Image</label>
+                <input class="form-control" name="image_url" ng-model="$ctrl.ad.item_image">
+            </div> -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+          Create Ad
+        </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
 <div class="container" ng-repeat="ad in $ctrl.ads track by $index">
   <div class="col-lg-12 col-sm-12">
     <h1>{{ad.title}} | {{ad.price}}</h1>
@@ -5,6 +35,7 @@
     <p>{{ad.description}}</p>
   </div>
 </div>
+
 <!-- <div class="container" ng-repeat="ad in $ctrl.ads track by $index">
   <div class="col-lg-4 col-sm-4">
     <form ng-submit="$ctrl.addAd()">
