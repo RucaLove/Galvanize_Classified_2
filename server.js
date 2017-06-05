@@ -16,7 +16,7 @@ const classifieds = require('./server/routes/classifieds');
 // app.use('/classifieds', classifieds);
 
 app.use('/javascripts', express.static(__dirname + "./client/javascripts"));
-// app.use('/stylesheets', express.static(__dirname + "./client/stylesheets"));
+app.use('/stylesheets', express.static(__dirname + "./client/stylesheets"));
 app.use('/views', express.static(__dirname + "./client/views"));
 
 app.use('/api/classifieds', classifieds);

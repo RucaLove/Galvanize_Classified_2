@@ -6,6 +6,7 @@
     service.$inject = ['$http']
 
     function service($http) {
+      const BASE_URL = '/'
 
       this.getAd = function() {
         return $http.get('/api/classifieds')
@@ -24,7 +25,12 @@
         }
 
         this.deleteAd = function(deleteAd) {
-          return $http.delete('/api/classifieds', deleteAd)
+          return $http.delete(`/api/classifieds/${deleteAd}`, deleteAd)
+        }
+
+        this.patchAd = function(formObj){
+          console.log(formObj)
+          return $http.patch(`/api/classifieds/${formObj.id}`, formObj)
         }
 
     }

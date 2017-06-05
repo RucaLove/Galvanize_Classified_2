@@ -1,39 +1,65 @@
 (function() {
 
-  angular.module("classifieds", [])
-  .component('ads', {
-    controller: controller,
-    templateUrl: './views/ads.html'
-  })
+    angular.module("classifieds", [])
+        .component('ads', {
+            controller: controller,
+            templateUrl: './views/ads.html'
+        })
 
-  function controller(AdService){
-  const vm = this;
-  vm.createAd = createAd
-  vm.deleteAd = deleteAd
+    function controller(AdService) {
 
-  vm.$onInit = function(){
-    AdService.getAd().then(function(data){
-      // console.log(data);
-      vm.ads = data
-    })
-  }
+        const vm = this;
+        vm.createAd = createAd
+        vm.deleteAd = deleteAd
+        vm.editAd = editAd
 
-  // vm.toggleAdForm = toggleAdForm
-  // function toggleAdForm() {
-  //   vm.newAd = !vm.newAd
-  // }
+        vm.$onInit = function() {
+            AdService.getAd()
+                .then(function(data) {
+                    // console.log(data);
+                    vm.ads = data
+                })
+        }
 
-  function createAd() {
-    AdService.newAd(vm.ad)
-    delete vm.ad
-  }
+        // vm.toggleAdForm = toggleAdForm
+        // function toggleAdForm() {
+        //   vm.newAd = !vm.newAd
+        // }
 
-    function deleteAd() {
-      console.log(vm.ad);
-      AdService.deleteAd(vm.ad)
-      delete vm.ad
+        function createAd() {
+            AdService.newAd(vm.ad)
+        }
+
+        function deleteAd(e) {
+            // console.log(vm.ad);
+            var id = e.target.id;
+            AdService.deleteAd(id)
+                .then(function() {
+                    AdService.getAd()
+                        .then(function(data2) {
+                            vm.ads = data2;
+                        })
+                })
+        }
+
+        function editAd(a,b,c,d,e) {
+          console.log(a,b,c,d,e);
+          var formObj = {
+            id: a,
+            title: b,
+            price: c,
+            description: d,
+            item_image: e
+          }
+          AdService.patchAd(formObj)
+          .then(function(){
+            AdService.getAd()
+            .then(function(data2) {
+              vm.ads = data2;
+            })
+          })
+        }
+
     }
-
-  }
 
 })()
